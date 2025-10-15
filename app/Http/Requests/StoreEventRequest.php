@@ -11,6 +11,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        /** somente users do tipo organizer podem criar eventos */
         return false;
     }
 
@@ -22,7 +23,18 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title'        => ['required','string','max:150'],
+            'description'  => ['nullable','string','max:5000'],
+            'date'         => ['required','date','after:now'],
+            'ticket_price' => ['required','numeric','min:0'],
+            'capacity'     => ['required','integer','min:1'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'date.after' => 'A data do evento deve ser no futuro.',
         ];
     }
 }
