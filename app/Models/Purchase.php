@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Event extends Model
+class Purchase extends Model
 {
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory;
 
-    protected $table = 'events';
+    protected $table = 'purchase';
 
     protected $fillable = [
         'user_id',
@@ -20,4 +21,14 @@ class Event extends Model
         'status',
         'created_at'
     ];
+
+    public function event(): BelongsTo
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
