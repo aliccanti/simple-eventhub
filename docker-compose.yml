@@ -1,0 +1,38 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        container_name: simple_eventhub_app
+        working_dir: /var/www
+        volumes:
+            - .:/var/www
+        depends_on:
+            - db
+
+    nginx:
+        image: nginx:alpine
+        container_name: simple_eventhub_nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - .:/var/www
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+
+    db:
+        image: mysql:8.0
+        container_name: simple_eventhub_db
+        environment:
+            MYSQL_DATABASE: simple_eventhub_db
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: simple_eventhub
+            MYSQL_PASSWORD: A@344!Teste
+        ports:
+            - "3307:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+
+volumes:
+    mysql_data:
