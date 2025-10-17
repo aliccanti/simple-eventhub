@@ -8,6 +8,11 @@ use App\ValueObjects\Email;
 
 class UserRepository implements UserRepositoryInterface
 {
+    public function getById(int $userId): ?User
+    {
+        return User::find($userId);
+    }
+
     public function create(string $fullName, Email $email, string $password, UserTypeEnum $type): User
     {
         return User::create([
