@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained('events')->cascadeOnUpdate()->restrictOnDelete();
             $table->unsignedInteger('quantity');
             $table->decimal('total_amount', 12, 2);
-            $table->enum('status', ['pending','confirmed','canceled'])->default('pending');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->decimal('ticket_price', 10, 2)->default(0);
             $table->unsignedInteger('capacity');
-            $table->unsignedInteger('tickets_sold')->default(0); //?
+            $table->unsignedInteger('tickets_sold')->default(0);
 
             $table->timestamps();
         });
