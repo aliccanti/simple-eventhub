@@ -12,7 +12,7 @@ class StoreEventRequest extends FormRequest
     public function authorize(): bool
     {
         /** somente users do tipo organizer podem criar eventos */
-        return false;
+        return true;
     }
 
     /**

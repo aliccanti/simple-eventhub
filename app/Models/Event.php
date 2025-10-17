@@ -34,4 +34,18 @@ class Event extends Model
         return $this->hasMany(Purchase::class);
     }
 
+    public function hasTicketsAvailable(): bool
+    {
+        return $this->tickets_sold >= $this->capacity;
+    }
+    public function hasExceededCapacity(int $quantityTickets): bool
+    {
+        return $this->tickets_sold + $quantityTickets >= $this->capacity;
+    }
+
+    public function reserve(int $quantityTickets): void
+    {
+        $this->tickets_sold += $quantityTickets;
+    }
+
 }
