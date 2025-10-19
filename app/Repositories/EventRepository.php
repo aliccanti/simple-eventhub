@@ -8,6 +8,11 @@ use Carbon\Carbon;
 
 class EventRepository implements EventRepositoryInterface
 {
+    public function getById(int $eventId): ?Event
+    {
+        return Event::find($eventId);
+    }
+
     public function create(string $title, string $description, Carbon $date, float $ticketPrice, int $capacity, string $organizerId): Event
     {
         return Event::create([
@@ -16,7 +21,7 @@ class EventRepository implements EventRepositoryInterface
             'date' => $date->format('Y-m-d'),
             'ticket_price' => $ticketPrice,
             'capacity' => $capacity,
-            'organizer_id' => $organizerId
+            'organizer_id' => $organizerId,
         ]);
     }
 }

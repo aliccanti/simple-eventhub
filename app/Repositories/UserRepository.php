@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Repositories;
+
+use App\Enums\UserTypeEnum;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Enums\UserTypeEnum;
 use App\ValueObjects\Email;
 
 class UserRepository implements UserRepositoryInterface
@@ -19,7 +20,12 @@ class UserRepository implements UserRepositoryInterface
             'name' => $fullName,
             'email' => $email->value(),
             'password' => $password,
-            'type' => $type->value
+            'type' => $type->value,
         ]);
+    }
+
+    public function getEmailByUserId(int $userId): ?Email
+    {
+        return Email::from(User::find($userId)->email);
     }
 }
