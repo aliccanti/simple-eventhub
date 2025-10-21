@@ -13,10 +13,4 @@ class PurchaseRepository implements PurchaseRepositoryInterface
             ->where('event_id', $eventId)
             ->sum('quantity');
     }
-
-    public function quantityByUser(int $userId): int
-    {
-        return Purchase::where('user_id', $userId)
-            ->exists();
-    }
 }
