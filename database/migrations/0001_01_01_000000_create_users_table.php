@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('type', ['organizer','participant'])->default('participant');
+            $table->enum('type', ['organizer', 'participant'])->default('participant');
             $table->timestamps();
         });
     }
