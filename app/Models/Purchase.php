@@ -11,15 +11,14 @@ class Purchase extends Model
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory;
 
-    protected $table = 'purchase';
+    protected $table = 'purchases';
 
     protected $fillable = [
         'user_id',
         'event_id',
         'quantity',
         'total_amount',
-        'status',
-        'created_at'
+        'created_at',
     ];
 
     public function event(): BelongsTo

@@ -16,7 +16,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'type'
+        'type',
     ];
 
     /**
@@ -37,6 +37,7 @@ class User extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'type' => UserTypeEnum::class,
         ];
     }
 
@@ -52,6 +53,6 @@ class User extends Authenticatable
 
     public function isOrganizer(): bool
     {
-        return $this->type === UserTypeEnum::ORGANIZER->value;
+        return $this->type->value === UserTypeEnum::ORGANIZER->value;
     }
 }

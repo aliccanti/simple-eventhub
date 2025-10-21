@@ -36,16 +36,17 @@ class Event extends Model
 
     public function hasTicketsAvailable(): bool
     {
-        return $this->tickets_sold >= $this->capacity;
+        return $this->tickets_sold < $this->capacity;
     }
+
     public function hasExceededCapacity(int $quantityTickets): bool
     {
         return $this->tickets_sold + $quantityTickets >= $this->capacity;
     }
 
-    public function reserve(int $quantityTickets): void
+    public function hasExceededUserLimitByEvent(int $userTotalTickets, int $quantityTickets): bool
     {
-        $this->tickets_sold += $quantityTickets;
+        return $userTotalTickets + $quantityTickets > 15;
     }
 
 }
