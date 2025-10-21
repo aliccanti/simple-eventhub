@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\EventInputDto;
 use App\Http\Requests\StoreEventRequest;
 use App\Services\EventService;
-use Illuminate\Http\JsonResponse;
-use App\DTO\EventInputDto;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+
 class EventController extends Controller
 {
-    public function __construct(private readonly EventService $eventService) {
+    public function __construct(private readonly EventService $service) {}
 
-    }
-     public function __invoke(StoreEventRequest $request): JsonResponse
+    public function __invoke(StoreEventRequest $request): JsonResponse
     {
         $inputDto = new EventInputDto(
             title: $request->input('title'),
@@ -23,7 +23,7 @@ class EventController extends Controller
             organizerId: $request->input('organizer_id'),
         );
 
-        $response = $this->eventService->store($inputDto);
+        $response = $this->service->store($inputDto);
 
         return response()->json($response);
     }
