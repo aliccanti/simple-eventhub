@@ -15,6 +15,7 @@ class Event extends Model
     protected $table = 'events';
 
     public const LIMIT_TICKETS_PER_USER = 15;
+
     protected $fillable = [
         'organizer_id',
         'title',
@@ -23,6 +24,11 @@ class Event extends Model
         'ticket_price',
         'capacity',
         'tickets_sold',
+    ];
+
+    protected $casts = [
+        'date' => 'date',
+        'ticket_price' => 'decimal:2',
     ];
 
     public function organizer(): BelongsTo

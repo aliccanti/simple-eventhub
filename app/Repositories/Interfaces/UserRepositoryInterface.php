@@ -4,13 +4,13 @@ namespace App\Repositories\Interfaces;
 
 use App\Enums\UserTypeEnum;
 use App\Models\User;
-use App\ValueObjects\Email;
+use App\ValueObjects\Mail;
 
 interface UserRepositoryInterface
 {
     public function getById(int $userId): ?User;
 
-    public function create(string $fullName, Email $email, string $password, UserTypeEnum $type): User;
+    public function create(string $fullName, Mail $email, string $password, UserTypeEnum $type): int;
 
-    public function getEmailByUserId(int $userId): ?Email;
+    public function getEmailByUserId(int $userId): ?Mail;
 }

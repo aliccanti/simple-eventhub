@@ -17,6 +17,7 @@ use App\Services\Interfaces\AuthorizerServiceInterface;
 use App\Services\Interfaces\NotificationServiceInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Psr\Log\LoggerInterface;
 
 class PurchaseService
 {

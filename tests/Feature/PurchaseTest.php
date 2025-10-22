@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Services\Interfaces\AuthorizerServiceInterface;
 use App\Services\Interfaces\NotificationServiceInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
 
 class PurchaseTest extends TestCase
 {
@@ -58,6 +58,4 @@ class PurchaseTest extends TestCase
             'invalid email' => [['email' => 'arroadoze'], ['email']],
         ];
     }
-
-
 }

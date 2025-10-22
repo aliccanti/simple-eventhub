@@ -4,7 +4,7 @@ namespace App\ValueObjects;
 
 use InvalidArgumentException;
 
-final class Email
+final class Mail
 {
     public function __construct(
         private string $value
@@ -17,9 +17,9 @@ final class Email
 
     }
 
-    public static function from(string $email): self
+    public static function from(string $mail): self
     {
-        return new self($email);
+        return new self($mail);
     }
 
     public function value(): string

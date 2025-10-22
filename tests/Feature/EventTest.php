@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
 
 class EventTest extends TestCase
 {
@@ -27,8 +27,8 @@ class EventTest extends TestCase
         $response->assertStatus(200)->assertJsonStructure([
             'title',
             'description',
-            'date' ,
-            'ticket_price' ,
+            'date',
+            'ticketPrice',
             'capacity',
         ]);
     }

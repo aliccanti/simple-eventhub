@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Event;
 use App\Repositories\Interfaces\EventRepositoryInterface;
-use Carbon\Carbon;
 
 class EventRepository implements EventRepositoryInterface
 {
@@ -13,15 +12,18 @@ class EventRepository implements EventRepositoryInterface
         return Event::find($eventId);
     }
 
-    public function create(string $title, string $description, Carbon $date, float $ticketPrice, int $capacity, string $organizerId): Event
+    public function create(string $title, string $description, string $date, string $ticketPrice, int $capacity, int $organizerId): int
     {
-        return Event::create([
+        $event = Event::create([
             'title' => $title,
             'description' => $description,
-            'date' => $date->format('Y-m-d'),
+            'date' => $date,
             'ticket_price' => $ticketPrice,
             'capacity' => $capacity,
             'organizer_id' => $organizerId,
         ]);
+
+        return $event->id;
+
     }
 }

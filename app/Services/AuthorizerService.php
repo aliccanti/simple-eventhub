@@ -4,29 +4,25 @@ namespace App\Services;
 
 use App\Exceptions\ConnectionException;
 use App\Services\Interfaces\AuthorizerServiceInterface;
-// use App\Support\CircuitBreaker;
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Psr\Log\LoggerInterface;
 
 class AuthorizerService implements AuthorizerServiceInterface
 {
-    // private CircuitBreaker $circuitBreaker;
-
     public function __construct(
         protected Client $client,
-    ) {
-        // $this->circuitBreaker = new CircuitBreaker;
-    }
+        protected LoggerInterface $logger
+    ) {}
 
-    public function authorize(): bool|Exception
+    public function authorize(): bool
     {
-        Log::info('[authorizer] Inicia processo de autorização');
-        for ($attempts = 0; $attempts <= 3; $attempts++) {
+        $maxAttempts = 3;
+        $this->logger->info('Inicia processo de autorização');
+        for ($attempts = 1; $attempts <= $maxAttempts; $attempts++) {
             try {
-                Log::info('[authorizer] Envia requisição', [
+                $this->logger->info('Enviado requisição de autorização', [
                     'attempts' => $attempts,
                 ]);
 
@@ -40,7 +36,7 @@ class AuthorizerService implements AuthorizerServiceInterface
 
                 $content = $response->getBody()->getContents();
 
-                Log::info('[authorizer] Requisição realizada com sucesso', [
+                $this->logger->info('Requisição realizada com sucesso', [
                     'status' => $response->getStatusCode(),
                     'response' => $content,
                 ]);
@@ -50,24 +46,19 @@ class AuthorizerService implements AuthorizerServiceInterface
                 return $json['data']['authorization'];
 
             } catch (ConnectException $e) {
-                Log::error('[authorizer] Houve um erro ao realizar a requisição', [
+                 $this->logger->error('Houve um erro ao realizar a requisição', [
                     'message' => $e->getMessage(),
                 ]);
-                // $this->circuitBreaker->onFailure();
-                if ($attempts === 3) {
+                if ($attempts === $maxAttempts) {
                     Log::error('[authorizer] Limite de tentativas excedido', [
                         'attempts' => $attempts,
                     ]);
-                    throw new ConnectionException; // exception especifica
+                    throw new ConnectionException();
                 }
                 sleep(pow(2, $attempts - 1));
+                return false;
             }
 
         }
-    }
-
-    public function processFallback()
-    {
-        return Str::random(16);
     }
 }

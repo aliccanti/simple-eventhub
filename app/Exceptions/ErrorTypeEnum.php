@@ -9,4 +9,5 @@ enum ErrorTypeEnum: string
     case USER_LIMIT_EXCEEDED = 'urn:purchases:user-limit-exceeded';
     case PAYMENT_NOT_AUTH = 'urn:payments:not-authorized';
     case PARTICIPANT_CANNOT_CREATE_EVENT = 'urn:user:participant-cannot-create-event';
+    case CONNECTION_FAILED = 'urn:purchases:connection-external-failed';
 }

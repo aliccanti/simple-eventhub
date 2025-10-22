@@ -6,7 +6,6 @@ use App\DTO\UserInputDto;
 use App\Enums\UserTypeEnum;
 use App\Http\Requests\StoreUserRequest;
 use App\Services\UserService;
-use App\ValueObjects\Email;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
@@ -17,7 +16,7 @@ class UserController extends Controller
     {
         $inputDto = new UserInputDto(
             fullName: $request->input('name'),
-            email: Email::from($request->input('email')),//retirar email
+            mail: $request->input('email'),
             password: $request->input('password'),
             type: UserTypeEnum::from($request->input('type')),
         );

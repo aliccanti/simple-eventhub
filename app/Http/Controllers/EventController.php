@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DTO\EventInputDto;
 use App\Http\Requests\StoreEventRequest;
 use App\Services\EventService;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 
 class EventController extends Controller
@@ -17,7 +16,7 @@ class EventController extends Controller
         $inputDto = new EventInputDto(
             title: $request->input('title'),
             description: $request->input('description'),
-            date: Carbon::parse($request->input('date')),
+            date: $request->input('date'),
             ticketPrice: $request->input('ticket_price'),
             capacity: $request->input('capacity'),
             organizerId: $request->input('organizer_id'),

@@ -36,22 +36,12 @@ abstract class DomainException extends Exception
 
     public function report(): void
     {
-        if (app()->environment('testing')) {
-            return;
-        }
-
-        $request = request();
-
         $context = [
             'error' => [
                 'type' => $this->type(),
                 'title' => $this->title(),
                 'status' => $this->status(),
                 'detail' => $this->detail(),
-            ],
-            'request' => [
-                'method' => $request?->getMethod(),
-                'path' => $request?->path(),
             ],
         ];
 

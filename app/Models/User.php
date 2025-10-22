@@ -28,18 +28,10 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-            'type' => UserTypeEnum::class,
-        ];
-    }
+    protected $casts = [
+        'password' => 'hashed',
+        'type' => UserTypeEnum::class,
+    ];
 
     public function events(): HasMany
     {

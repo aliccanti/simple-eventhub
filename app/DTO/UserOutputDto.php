@@ -4,12 +4,11 @@ namespace App\DTO;
 
 use App\Enums\UserTypeEnum;
 
-final class UserInputDto
+final class UserOutputDto
 {
     public function __construct(
         public string $fullName,
         public string $mail,
-        public string $password,
         public UserTypeEnum $type
     ) {}
 }

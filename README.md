@@ -2,27 +2,35 @@
 
 Aplicação para gestão de eventos e compra de ingressos.
 
-### 🔧 Instalação
+## 🔧 1. Instalação
 
-Para realizar a instalação dê esses comandos:
+Para executar essa aplicação em seu ambiente local é necessário apenas o Docker.
 
+### 1.1 Baixar o projeto do Git
+
+```sh
+git clone git@github.com:aliccanti/simple-eventhub.git
 ```
-docker compose up 
+
+### 1.2 Definir variáveis de ambiente
+
+Crie um arquivo `.env` a partir do arquivo `.env.example` com as suas credenciais.
+
+```sh
+cp .env.example .env
+```
+### 1.3 Subir o projeto no Docker
+```
+docker compose up -d
 ```
 
-Ele realizará a instalação completa da aplicação. Após isso:
+### 1.4 Criação da base de dados e tabelas
 
 ```
 php artisan migrate
 ```
 
-Para criar as tabelas necessárias no banco de dados. Para popular o banco, para fins de teste: 
-
-```
-php artisan db:seed
-```
-
-## ⚙️ Executando os testes
+## ⚙️ 2. Executando os testes
 
 A aplicação é coberta com testes unitários para assegurar confiabilidade.
 
@@ -32,7 +40,7 @@ Para executar os testes:
 composer test:unit
 ```
 
-### ⌨️ E testes de estilo de codificação
+## ⌨️ 3. Testes de estilo de codificação
 
 Foi adicionado ferramentas de análise estática para garantir estilo de codificação. Teste rodando os seguintes comandos:
 
@@ -45,22 +53,15 @@ composer run lint:static
 ```
 
 
-## 🛠️ Construído com
+## 4. Erros retornados
 
-## Rotas da API
-
-### `POST /buy-ticket`
-
-Permite a compra de ingressos.
-
-#### 🔸 Requisição
-
-```json
-{
-  "quantity": 3,
-  "event_id": 4,
-  "user_id": 2
-}
-```
+| Tipo do Erro             | Descrição                                                                                       |
+|--------------------------|-------------------------------------------------------------------------------------------------|
+| `CapacityExceededException` | Ocorre ao tentar realizar a compra de ingressos onde a quantidade ultrapassa o quantitativo de ingressos disponíveis do evento.                                              |
+| `EventSoldOutException` | Ocorre ao tentar realizar uma compra de evento sem ingressos disponíveis. |
+| `ParticipantUserCannotCreateEventException` | Ocorre ao tentar criar um evento a partir de um usuário que não é organizador.                           |
+| `PaymentNotAuthorizedException`      | Ocorre quando a compra é negada pelo autorizador externo.      |
+| `UserLimitExceededException`     | Ocorre quando o usuário atingiu o limite de ingressos permitidos por evento.                                              |
+| `ConnectionException`         | Ocorre quando a comunicação com autorizador externo falha.                                                           |                                                 |
 
 

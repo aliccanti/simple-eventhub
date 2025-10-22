@@ -6,5 +6,5 @@ use Exception;
 
 interface AuthorizerServiceInterface
 {
-    public function authorize(): bool|Exception;
+    public function authorize(): bool;
 }

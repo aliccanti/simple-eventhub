@@ -15,7 +15,7 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\AuthorizerServiceInterface;
 use App\Services\Interfaces\NotificationServiceInterface;
 use App\Services\PurchaseService;
-use App\ValueObjects\Email;
+use App\ValueObjects\Mail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\TestCase;
@@ -34,7 +34,7 @@ class PurchaseServiceTest extends TestCase
 
     private NotificationServiceInterface&MockObject $notifier;
 
-    private PurchaseService&MockObject $service;
+    private PurchaseService $service;
 
     protected function setUp(): void
     {
@@ -155,7 +155,7 @@ class PurchaseServiceTest extends TestCase
         $this->userRepo->expects($this->once())
             ->method('getEmailByUserId')
             ->with($user->id)
-            ->willReturn(new Email($user->email));
+            ->willReturn(new Mail($user->email));
 
         $dto = new PurchaseInputDto(
             userId: $user->id,

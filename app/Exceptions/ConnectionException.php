@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 class ConnectionException extends DomainException
 {
-    public function __construct(string $message = 'Falha na autorização')
+    public function __construct(string $message = 'Falha na conexão com autorizador externo.')
     {
         parent::__construct($message);
     }
@@ -16,11 +16,11 @@ class ConnectionException extends DomainException
 
     public function type(): string
     {
-        return ErrorTypeEnum::USER_LIMIT_EXCEEDED->value; // atualizar
+        return ErrorTypeEnum::CONNECTION_FAILED->value;
     }
 
     public function title(): string
     {
-        return 'Falha na autorização:';
+        return 'Falha na autorização com autorizador externo';
     }
 }

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\UserTypeEnum;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
-
     public function definition(): array
     {
         return [
