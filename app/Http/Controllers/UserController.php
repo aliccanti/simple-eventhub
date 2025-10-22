@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $inputDto = new UserInputDto(
             fullName: $request->input('name'),
-            email: Email::from($request->input('email')),
+            email: Email::from($request->input('email')),//retirar email
             password: $request->input('password'),
             type: UserTypeEnum::from($request->input('type')),
         );

@@ -43,7 +43,7 @@ class StoreUserRequest extends FormRequest
             'password.min' => 'A senha precisa ter pelo menos 8 caracteres.',
             'password.max' => 'A senha ultrapassou o tamanho permitido.',
             'type.required' => 'O tipo precisa ser informado.',
-            'type.required' => 'O tipo está no formato incorreto.',
+            'type.string' => 'O tipo está no formato incorreto.',
         ];
     }
 }

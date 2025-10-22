@@ -19,6 +19,7 @@ class PurchaseFactory extends Factory
     public function definition(): array
     {
         $quantity = $this->faker->numberBetween(1, 3);
+
         return [
             'user_id' => User::factory(),
             'event_id' => Event::factory(),

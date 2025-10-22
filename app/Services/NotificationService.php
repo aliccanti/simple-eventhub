@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Jobs\PurchaseNotificationJob;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\NotificationServiceInterface;
-use GuzzleHttp\Client;
 use App\ValueObjects\Email;
+use Illuminate\Support\Facades\Log;
 
 class NotificationService implements NotificationServiceInterface
 {
@@ -16,6 +16,8 @@ class NotificationService implements NotificationServiceInterface
 
     public function notify(Email $email, string $eventName): void
     {
+        Log::debug('Notificando o usuário '.$email->value().' sobre o evento '.$eventName);
+        
         PurchaseNotificationJob::dispatch($email->value(), $eventName);
     }
 }

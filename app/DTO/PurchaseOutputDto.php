@@ -15,11 +15,11 @@ final class PurchaseOutputDto
     public function jsonSerialize(): array
     {
         return [
-            'id'           => $this->id,
-            'quantity'     => $this->quantity,
+            'id' => $this->id,
+            'quantity' => $this->quantity,
             'total_amount' => $this->totalAmount,
-            'event'        => $this->eventId,
-            'user'         => $this->userId,
+            'event' => $this->eventId,
+            'user' => $this->userId,
         ];
     }
 }

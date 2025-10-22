@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Log;
 abstract class DomainException extends Exception
 {
     abstract public function status(): int;
-    abstract public function type(): string;
-    abstract public function title(): string;
 
+    abstract public function type(): string;
+
+    abstract public function title(): string;
 
     public function detail(): string
     {
@@ -20,11 +21,11 @@ abstract class DomainException extends Exception
 
     public function render(): JsonResponse
     {
-         $exception = [
-            'type'     => $this->type(),
-            'title'    => $this->title(),
-            'status'   => $this->status(),
-            'detail'   => $this->detail()
+        $exception = [
+            'type' => $this->type(),
+            'title' => $this->title(),
+            'status' => $this->status(),
+            'detail' => $this->detail(),
         ];
 
         return response()
@@ -43,20 +44,18 @@ abstract class DomainException extends Exception
 
         $context = [
             'error' => [
-                'type'      => $this->type(),
-                'title'     => $this->title(),
-                'status'    => $this->status(),
-                'detail'    => $this->detail()
+                'type' => $this->type(),
+                'title' => $this->title(),
+                'status' => $this->status(),
+                'detail' => $this->detail(),
             ],
             'request' => [
-                'method'     => $request?->getMethod(),
-                'path'       => $request?->path(),
+                'method' => $request?->getMethod(),
+                'path' => $request?->path(),
             ],
         ];
 
         Log::warning(json_encode($context));
 
     }
-
-
 }
